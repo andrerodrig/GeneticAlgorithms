@@ -27,24 +27,12 @@ function [selected] = spin_roulette(total_crossovers, cumulative_percentuals)
     for i = 1:total_crossovers
         for j = 1:2
             spin = rand();
-            if (spin > cumulative_percentuals($-1)) then
-                roulette(i,j) = find(cumulative_percentuals == cumulative_percentuals($))
-            else
-                selected_elmements = max(find(cumulative_percentuals <= spin))
-                if (selected_elmements <> []) then
-                    roulette(i,j) = selected_elmements
-                else
-                    roulette(i,j) = find(cumulative_percentuals(1))
-                end
-            end
+            selected_elmements = min(find(cumulative_percentuals >= spin))
+            roulette(i,j) = selected_elmements
         end
         while roulette(i,1) == roulette(i,2)
-            selected_elmements = max(find(cumulative_percentuals <= rand()))
-            if (selected_elmements <> []) then
-                roulette(i,2) = selected_elmements
-            else
-                roulette(i,2) = find(cumulative_percentuals(1))
-            end
+            selected_elmements = min(find(cumulative_percentuals >= rand()))
+            roulette(i,2) = selected_elmements
         end
     end
     selected = return(roulette);
