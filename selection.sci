@@ -9,15 +9,6 @@ function [selected_matrix] = selection(evaluated_vect)
     percentual_evaluations = evaluated_vect./total_evaluations
     distributed_percentual_evaluations = cumsum(percentual_evaluations);
 
-    disp("Total de avaliações");
-    disp(total_evaluations);
-
-    disp("Avaliações Percentuais");
-    disp(percentual_evaluations);
-
-    disp("Avaliações Percentuais distribuidos de entre 0% a 100%");
-    disp(distributed_percentual_evaluations);
-
     selected_matrix = spin_roulette(n_crossover, distributed_percentual_evaluations);
 
 endfunction
