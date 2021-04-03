@@ -3,6 +3,8 @@ clear
 
 exec("evaluation.sci", -1);
 exec("selection.sci", -1);
+exec("crossover.sci", -1);
+
 
 len_population = 5;
 n_genes = 5;
@@ -32,3 +34,6 @@ selected_matrix = selection(evaluated);
 disp("Indivíduos Selecionados");
 disp(selected_matrix);
 
+descendants = crossover(population, selected_matrix, 1);
+disp("Descendentes");
+disp(descendants);
