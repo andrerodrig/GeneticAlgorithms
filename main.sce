@@ -4,6 +4,7 @@ clear
 exec("evaluation.sci", -1);
 exec("selection.sci", -1);
 exec("crossover.sci", -1);
+exec("mutation.sci", -1);
 
 
 len_population = 5;
@@ -37,3 +38,7 @@ disp(selected_matrix);
 descendants = crossover(population, selected_matrix, 1);
 disp("Descendentes");
 disp(descendants);
+
+new_descnendants = mutation(descendants, 0.2, 0.1);
+disp("Descendentes apos processo de mutação");
+disp(new_descendants);
