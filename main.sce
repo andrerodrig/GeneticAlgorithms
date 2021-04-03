@@ -1,14 +1,15 @@
 clear
-//clc
+clc
 
 exec("evaluation.sci", -1);
 exec("selection.sci", -1);
 exec("crossover.sci", -1);
 exec("mutation.sci", -1);
+exec("elitism.sci", -1);
 
-
-len_population = 5;
-n_genes = 5;
+disp("-------------Algorítmo Genético-----------")
+len_population = 6;
+n_genes = 8;
 
 function eval_f = eval_function(x)
     eval_f = return((x.^2).*cos(2.5*x).*exp(-x));
@@ -28,9 +29,6 @@ disp(population);
 
 evaluated = evaluation(population, eval_function);
 
-disp("Valores avaliados");
-disp(evaluated);
-
 selected_matrix = selection(evaluated);
 disp("Indivíduos Selecionados");
 disp(selected_matrix);
@@ -42,3 +40,21 @@ disp(descendants);
 new_descnendants = mutation(descendants, 0.2, 0.1);
 disp("Descendentes apos processo de mutação");
 disp(new_descendants);
+
+evaluated_parent = evaluated;
+disp("Avaliação dos pais");
+disp(evaluated_parent);
+
+evaluated_descend = evaluation(new_descendants,eval_function);
+disp("Avaliação dos descendentes");
+disp(evaluated_descend);
+
+integrated_individuals = 0.3;
+
+[new_population, new_eval] = elitism(population,new_descendants, evaluated_parent, evaluated_descend, integrated_individuals);
+
+disp("Nova geração de pais");
+disp(new_population);
+
+disp("Avaliação dos novos pais");
+disp(new_eval);
